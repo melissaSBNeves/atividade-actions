@@ -39,5 +39,18 @@ class CalculadoraServiceTest {
         assertEquals("Divisão por zero não permitida", exception.getReason());
     }
 
+    @Test
+    @DisplayName("Quando acionado com 10 e 2, então deve retornar 20")
+    public void testMultiplicar(){
+
+        CalculadoraService calculadoraService = new CalculadoraService();
+        double a = 10;
+        double b = 2;
+        double esperado = 20;
+
+        double resultado = calculadoraService.multiplicar(a, b);
+        assertEquals(esperado, resultado);
+    }
+
 
 }

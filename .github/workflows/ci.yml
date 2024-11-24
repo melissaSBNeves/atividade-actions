@@ -1,21 +1,21 @@
 name: Exemplo de CI
 
 on:
-    push:
-      branches: [ main ]
+  push:
+    branches: [ main ]
 
 jobs:
-    build:
-      runs-on: ubuntu-latest
-      steps:
-        - names: Checkout code
-          uses: actions/checkout@v4
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-        - names: Set up JDK 17
-          uses: actions/setup-java@v4
-          with:
-            distributions: 'temurin'
-            java-versions: '17'
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
-        - names: Build with Maven
-          run: mvn -B package -DskipTests
+      - name: Build with Maven
+        run: mvn -B package -DskipTests

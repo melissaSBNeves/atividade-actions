@@ -18,4 +18,8 @@ public class CalculadoraService {
 
         return a / b;
     }
+
+    public Double multiplicar(double a, double b) {
+        return a * b;
+    }
 }

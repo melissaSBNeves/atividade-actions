@@ -21,4 +21,9 @@ public class CalculadoraController {
     public ResponseEntity<Double> dividir(@PathVariable double a, @PathVariable double b){
        return ok(service.dividir(a, b));
     }
+
+    @PostMapping("/multiplicar/{a}/{b}")
+    public ResponseEntity<Double> multiplicar(@PathVariable double a, @PathVariable double b){
+        return ok(service.multiplicar(a, b));
+    }
 }

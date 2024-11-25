@@ -1,0 +1,27 @@
+name: Exemplo de CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USER }}" --password-stdin
+
+      - name: Pull Docker image
+        run: docker pull melissaneves/atividade-actions:latest
+
+      - name: Stop Docker container (if running)
+        run: |
+          docker ps -q --filter "name=atividade-actions" | grep -q . && docker stop atividade-actions || echo "Container not running"
+
+      - name: Remove Docker container (if exists)
+        run: |
+          docker ps -aq --filter "name=atividade-actions" | grep -q . && docker rm atividade-actions || echo "Container does not exist"
+
+      - name: Run new Docker container
+        run: docker run --name atividade-actions -d -p 8080:8080 melissaneves/atividade-actions:latest

@@ -1,0 +1,23 @@
+name: Exemplo de CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Pull Docker image
+        uses: docker pull melissaneves/atividade-actions:latest 
+
+      - name: Stop Docker container
+        uses: docker stop atividade-actions || true
+      
+      - name: Remove Docker container
+        uses: docker rm atividade-actions || true
+
+      - name: Remove Docker container
+        run: docker run --name atividade-actions -d -p 8080:8080 melissaneves/atividade-actions:latest 
+
